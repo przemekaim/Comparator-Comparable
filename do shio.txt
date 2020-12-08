@@ -1,0 +1,7 @@
+1. comparator i comparable w osobnych klasach implementacja
+
+2. to samo tylko za pomoca wyrazen lambda
+
+3. to samo tylko pomyslec o referencjach do metod
+
+4. stworzyc wlasne interfejsy funkyjnce i zrobic lambde
