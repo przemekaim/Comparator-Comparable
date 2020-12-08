@@ -1,16 +1,18 @@
-package pl.java.sort;
+package pl.java.lambda;
 
 import java.util.Objects;
 
-public class Waifu implements Comparable<Waifu>{
+public class Student {
     private String name;
     private String surname;
     private int age;
+    private int grade;
 
-    public Waifu(String name, String surname, int age) {
+    public Student(String name, String surname, int age, int grade) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.grade = grade;
     }
 
     public String getName() {
@@ -37,35 +39,29 @@ public class Waifu implements Comparable<Waifu>{
         this.age = age;
     }
 
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
 
     @Override
     public String toString() {
-        return  name + " " + surname + " " + age + "\n";
+        return name + " " + surname + " " + age + " " + grade + "\n";
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Waifu waifu = (Waifu) o;
-        return age == waifu.age && Objects.equals(name, waifu.name) && Objects.equals(surname, waifu.surname);
+        Student student = (Student) o;
+        return age == student.age && grade == student.grade && Objects.equals(name, student.name) && Objects.equals(surname, student.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, age);
-    }
-
-    @Override
-    public int compareTo(Waifu o) {
-        int result = this.name.compareTo(o.name);
-        if (result == 0) {
-            result = this.surname.compareTo(o.surname);
-            if(result == 0) {
-                return Integer.compare(this.age, o.age);
-            }
-            return result;
-        }
-        return result;
+        return Objects.hash(name, surname, age, grade);
     }
 }

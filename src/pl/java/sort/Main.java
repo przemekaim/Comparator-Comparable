@@ -1,11 +1,83 @@
 package pl.java.sort;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
+
+import pl.java.lambda.*;
+
+// 1. Implementacja interfejsu Comparable<Waifu> i sortowanie zwykle
+
 
 public class Main {
     public static void main(String[] args) {
+        List<Waifu> waifuList = new ArrayList<>();
+        waifuList.add(new Waifu("Rem", "-", 17));
+        waifuList.add(new Waifu("02", "-", 18));
+        waifuList.add(new Waifu("Emilia", "-", 21));
+        waifuList.add(new Waifu("Mirai", "Kuriyama", 14));
+        waifuList.add(new Waifu("Mai", "Sakurajima", 16));
+        waifuList.add(new Waifu("Chika", "Fujiwara", 17));
+        waifuList.add(new Waifu("Yukino", "Yukinoshita", 18));
+        waifuList.add(new Waifu("Mio", "Akiyama", 17));
+        waifuList.add(new Waifu("Yui", "Hirasawa", 17));
+        waifuList.add(new Waifu("Yui", "Hirasawa", 13));
+        waifuList.add(new Waifu("Yui", "Asawa", 17));
+        waifuList.add(new Waifu("Tsumugi", "Kotobuki", 19));
 
+        // -----------------------------------------------------------------------------------
+        // 1. Comparable
+/*        System.out.println(waifuList);
+        System.out.println("------------------------------------");
+        Collections.sort(waifuList);
+        System.out.println(waifuList);*/
+
+        // -----------------------------------------------------------------------------------
+        // 2. Comparator
+        //waifuList.sort(new CompareByLength());
+        //System.out.println(waifuList);
+        //waifuList.sort(new CompareBySurname());
+        //System.out.println(waifuList);
+        //Collections.reverse(waifuList);
+        //System.out.println(waifuList);
+
+        // -----------------------------------------------------------------------------------
+        // 3. Lambda expressions
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student("Rem", "-", 17, 4));
+        studentList.add(new Student("02", "-", 18, 5));
+        studentList.add(new Student("Emilia", "-", 21, 6));
+        studentList.add(new Student("Mirai", "Kuriyama", 14, 3));
+        studentList.add(new Student("Mai", "Sakurajima", 16, 4));
+        studentList.add(new Student("Chika", "Fujiwara", 17, 4));
+        studentList.add(new Student("Yukino", "Yukinoshita", 18, 5));
+        studentList.add(new Student("Mio", "Akiyama", 17, 6));
+        studentList.add(new Student("Yui", "Hirasawa", 17, 4));
+        studentList.add(new Student("Yui", "Hirasawa", 13, 6));
+        studentList.add(new Student("Yui", "Hirasawa", 13, 3));
+        studentList.add(new Student("Yui", "Hirasawa", 13, 1));
+        studentList.add(new Student("Yui", "Asawa", 17, 3));
+        studentList.add(new Student("Tsumugi", "Kotobuki", 19, 4));
+
+        // Sortowanie po imieniu
+        //studentList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+        // Sortowanie po ocenie
+        //studentList.sort((o1, o2) -> Integer.compare(o1.getGrade(), o2.getGrade()));
+        // Sortowanie po imieniu + ocenie
+        //studentList.sort(((o1, o2) -> o1.getName().compareTo(o2.getName() + Integer.compare(o1.getGrade(), o2.getGrade()))));
+        // Sortowanie po ocenie, jesli ta sama ocena to po imieniu
+/*        studentList.sort(((o1, o2) -> {
+            int result = Integer.compare(o1.getGrade(), o2.getGrade());
+            if (result == 0) {
+                return o1.getName().compareTo(o2.getName());
+            }
+            return result;
+        }));*/
+
+        // 4. Referencje do metod
+        // Sortowanie po imieniu
+        //studentList.sort(Comparator.comparing(Student::getName));
+        // Sortowanie po wieku
+        studentList.sort(Comparator.comparingInt(Student::getAge));
+        System.out.println(studentList);
     }
 }
