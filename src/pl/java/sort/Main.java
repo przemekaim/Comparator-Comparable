@@ -1,7 +1,8 @@
 package pl.java.sort;
 
-import java.lang.reflect.Array;
+
 import java.util.*;
+import java.util.function.IntSupplier;
 
 import pl.java.lambda.*;
 
@@ -23,6 +24,7 @@ public class Main {
         waifuList.add(new Waifu("Yui", "Hirasawa", 13));
         waifuList.add(new Waifu("Yui", "Asawa", 17));
         waifuList.add(new Waifu("Tsumugi", "Kotobuki", 19));
+
 
         // -----------------------------------------------------------------------------------
         // 1. Comparable
@@ -58,6 +60,16 @@ public class Main {
         studentList.add(new Student("Yui", "Asawa", 17, 3));
         studentList.add(new Student("Tsumugi", "Kotobuki", 19, 4));
 
+        //studentList.sort(Comparator.comparingInt(o -> o.getName().length()));
+        //studentList.sort((o1, o2) -> Integer.compare(o1.getName().length(), o2.getName().length()));
+
+
+        //Student student = new Student();
+        //IntSupplier intSupplier = student::getAge;
+        //IntSupplier gethas = () -> student.hashCode();
+
+        //studentList.forEach(System.out::print);
+        //System.out.println(studentList);
         // Sortowanie po imieniu
         //studentList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
         // Sortowanie po ocenie
@@ -71,13 +83,39 @@ public class Main {
                 return o1.getName().compareTo(o2.getName());
             }
             return result;
-        }));*/
+        }));*//*
 
         // 4. Referencje do metod
         // Sortowanie po imieniu
         //studentList.sort(Comparator.comparing(Student::getName));
         // Sortowanie po wieku
         studentList.sort(Comparator.comparingInt(Student::getAge));
-        System.out.println(studentList);
+        //System.out.println(studentList);
+
+        // 5. Krotki strumien
+
+        studentList.stream()
+                .map(Student::getAge)
+                .sorted((s, z) -> Integer.compare(z, s))
+                .filter(s -> s < 19)
+                //.filter(student -> student.getSurname().endsWith("-"))
+                .forEach(System.out::println);
+        studentList.stream()
+                .map(Student::getName)
+                .sorted(String::compareTo)
+                .forEach(System.out::println);*/
+
+        //studentList.sort(Comparator.comparing(Student::getSurname));
+        //studentList.forEach(System.out::print);
+        studentList.add(new Student("NULL", null, 17, 3));
+        studentList.add(new Student("Ram", "Koto", 17, 3));
+        studentList.sort(Comparator.comparing(Student::getSurname, Comparator.nullsFirst(Comparator.naturalOrder()))
+                .thenComparingInt(Student::getGrade)
+                .reversed());
+        studentList.forEach(System.out::print);
+
+        //System.out.println(studentList);
     }
+
+
 }

@@ -2,11 +2,15 @@ package pl.java.lambda;
 
 import java.util.Objects;
 
-public class Student {
+public class Student{
     private String name;
     private String surname;
     private int age;
     private int grade;
+
+    public Student() {
+    }
+
 
     public Student(String name, String surname, int age, int grade) {
         this.name = name;
@@ -64,4 +68,6 @@ public class Student {
     public int hashCode() {
         return Objects.hash(name, surname, age, grade);
     }
+
+
 }
